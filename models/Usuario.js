@@ -1,24 +1,10 @@
-import mongoose from 'mongoose'
-
 const usuarioSchema = new mongoose.Schema({
-  nombre: {
+  nombre: String,
+  email: { type: String, required: true, unique: true },
+  password: String,
+  rol: {
     type: String,
-    required: true,
-    trim: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true
-  },
-  password: {
-    type: String,
-    required: true
+    enum: ['cliente', 'medico', 'admin'],
+    default: 'cliente'
   }
-}, {
-  timestamps: true
-})
-
-export default mongoose.model('Usuario', usuarioSchema)
+}, { timestamps: true })
