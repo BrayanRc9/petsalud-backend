@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 export const registrar = async (req, res) => {
-  const { nombre, email, password } = req.body
+  const { nombre, email, password, rol = 'cliente' } = req.body
   try {
     const existeUsuario = await Usuario.findOne({ email })
     if (existeUsuario) {
@@ -13,7 +13,7 @@ export const registrar = async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const nuevoUsuario = new Usuario({ nombre, email, password: hash })
+    const nuevoUsuario = new Usuario({ nombre, email, password: hash, rol })
     await nuevoUsuario.save()
 
     res.status(201).json({ msg: 'Usuario creado correctamente' })
