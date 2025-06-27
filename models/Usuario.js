@@ -1,3 +1,5 @@
+import mongoose from 'mongoose'; // ESTA LÍNEA ES CLAVE ✅
+
 const usuarioSchema = new mongoose.Schema({
   nombre: String,
   email: { type: String, required: true, unique: true },
@@ -7,6 +9,6 @@ const usuarioSchema = new mongoose.Schema({
     enum: ['cliente', 'medico', 'admin'],
     default: 'cliente'
   }
-}, { timestamps: true })
+}, { timestamps: true });
 
 export default mongoose.model('Usuario', usuarioSchema);
