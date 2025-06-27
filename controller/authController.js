@@ -23,9 +23,9 @@ export const registrar = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-  const { email, password } = req.body
+  const { usuario, password } = req.body
   try {
-    const usuario = await Usuario.findOne({ email })
+    const usuario = await Usuario.findOne({ usuario })
     if (!usuario) {
       return res.status(404).json({ msg: 'Usuario no encontrado' })
     }
